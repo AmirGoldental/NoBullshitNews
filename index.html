@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>
+        No Bullshit News
+    </title>
+</head>
+
+<body style="text-align:right; font-family: Arial, Helvetica, sans-serif; margin-right: 10px;" id="body">
+    <img src="NoBullshitjpg.jpg" style="height: 100px;">
+    <div style="display: flex; justify-content: flex-end">
+        <p id="GFG_UP" style="width: 400px;" style="display: flex; justify-content: flex-end">
+        </p>
+
+    </div>
+
+    <script>
+        var el_up = document.getElementById("GFG_UP");
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", 'https://m.ynet.co.il/home/getnewsflash/yweb.aspx', false); // false for synchronous request
+        xmlHttp.send(null);
+        var list = JSON.parse(xmlHttp.responseText).rss.channel.item
+
+        el_up.innerHTML = "Click on the button to create "
+            + "the table from the JSON data.<br><br>"
+            + JSON.stringify(list[0]) + "<br>"
+            + JSON.stringify(list[1]) + "<br>"
+            + JSON.stringify(list[2]);
+        HTML_String = "";
+
+        // Traversing the JSON data 
+        for (var i = 0; i < list.length; i++) {
+            HTML_String += '<p> <h3 style="margin-bottom: 0px; padding-bottom: 0px;">';
+            HTML_String += list[i].title;
+            HTML_String += "</h3>";
+            HTML_String += list[i].subTitle;
+            HTML_String += "</p>";
+        }
+        el_up.innerHTML = HTML_String;  
+    </script>
+</body>
+
+</html>
