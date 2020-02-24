@@ -5,6 +5,18 @@
     <title>
         No Bullshit News
     </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
 </head>
 
 <body style="text-align:right; font-family: Arial, Helvetica, sans-serif; margin-right: 10px;" id="body">
@@ -21,22 +33,19 @@
         xmlHttp.open("GET", 'https://m.ynet.co.il/home/getnewsflash/yweb.aspx', false); // false for synchronous request
         xmlHttp.send(null);
         var list = JSON.parse(xmlHttp.responseText).rss.channel.item
-
-        el_up.innerHTML = "Click on the button to create "
-            + "the table from the JSON data.<br><br>"
-            + JSON.stringify(list[0]) + "<br>"
-            + JSON.stringify(list[1]) + "<br>"
-            + JSON.stringify(list[2]);
-        HTML_String = "";
+        HTML_String = '<div class="accordion" id="accordionExample">';
 
         // Traversing the JSON data 
         for (var i = 0; i < list.length; i++) {
-            HTML_String += '<p> <h3 style="margin-bottom: 0px; padding-bottom: 0px;">';
+            HTML_String += '<div class="card"><div class="card-header" id="heading' + i.toString() + '"><h2 class="mb-0"><button class="btn btn-link collapsed p-0 m-0 text-right text-body" type="button" data-toggle="collapse" data-target="#collapse' + i.toString() + '" aria-expanded="false" aria-controls="collapse' + i.toString() + '">';
             HTML_String += list[i].title;
-            HTML_String += "</h3>";
+            HTML_String += '<br><div class="text-secondary">'
+            HTML_String += list[i].pubDate;
+            HTML_String += '</div></button></h2></div><div id="collapse' + i.toString() + '" class="collapse" aria-labelledby="heading' + i.toString() + '" data-parent="#accordionExample"><div class="card-body">';
             HTML_String += list[i].subTitle;
-            HTML_String += "</p>";
+            HTML_String += "</div></div></div>";
         }
+        HTML_String += "</div>"
         el_up.innerHTML = HTML_String;  
     </script>
 </body>
