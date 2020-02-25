@@ -23,7 +23,7 @@
     <div class="d-flex align-items-end flex-column">
         <div class="col-lg-6 d-flex align-items-center justify-content-center" style="margin-top: 10px;">
             <img src="NoBullshitjpg.jpg" style="width: 100px; margin-right: 20px;">
-            <h3 style="margin-right: 20px; font-size: 40px;">No Bullshit News</h3>
+            <h3 style="margin-right: 20px; font-size: 50px;">No Bullshit News</h3>
         </div>
         <div class="col-lg-6">
             <p id="GFG_UP" style="width: 100%;">
@@ -40,11 +40,11 @@
 
         // Traversing the JSON data 
         for (var i = 0; i < list.length; i++) {
-            HTML_String += '<div class="card"><div class="card-header" id="heading' + i.toString() + '"><h2 class="mb-0"><button style="font-size: 30px;" class="btn btn-link collapsed p-0 m-0 text-right text-body" type="button" data-toggle="collapse" data-target="#collapse' + i.toString() + '" aria-expanded="false" aria-controls="collapse' + i.toString() + '">';
+            HTML_String += '<div class="card"><div class="card-header" id="heading' + i.toString() + '"><h2 class="mb-0"><button style="font-size: 50px;" class="btn btn-link collapsed p-0 m-0 text-right text-body" type="button" data-toggle="collapse" data-target="#collapse' + i.toString() + '" aria-expanded="false" aria-controls="collapse' + i.toString() + '">';
             HTML_String += list[i].title;
             HTML_String += '<br><div class="text-secondary">'
             HTML_String += list[i].pubDate;
-            HTML_String += '</div></button></h2></div><div id="collapse' + i.toString() + '" class="collapse" style="font-size: 30px; aria-labelledby="heading' + i.toString() + '" data-parent="#accordionExample"><div class="card-body">';
+            HTML_String += '</div></button></h2></div><div id="collapse' + i.toString() + '" class="collapse" style="font-size: 50px; aria-labelledby="heading' + i.toString() + '" data-parent="#accordionExample"><div class="card-body">';
             HTML_String += list[i].subTitle;
             HTML_String += "</div></div></div>";
         }
