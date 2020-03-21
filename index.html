@@ -44,7 +44,7 @@
     <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content" id="LogModal" style="font-size: 50px;">
         ...
     </div>
   </div>
@@ -52,7 +52,14 @@
     
     
     <script>
+        function write2log(LogString2Write){
+            var LogModal = document.getElementById("LogModal")
+            LogModal.innerHTML += LogString2Write + '\n';
+            console.log(LogString2Write)
+        }
         function refresh() {
+            
+            
             var el_up = document.getElementById("GFG_UP");
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.open("GET", 'https://m.ynet.co.il/home/getnewsflash/yweb.aspx', false); // false for synchronous request
@@ -80,18 +87,18 @@
             var YNetStr = xmlHttp.responseText;
             var n_json = YNetStr.search('components')
             if (n_json > 0) {
-                console.log('from json')
+                write2log('from json')
                 var YNetJson = YNetStr.slice(n_json, -1)
                 var n_json_1 = YNetJson.search('{')
                 var n_json_2 = YNetJson.search('}')
                 var YNetJson = YNetJson.slice(n_json_1, n_json_2 + 1)
                 title = YNetJson.slice(YNetJson.search('title') + 8, YNetJson.search('sub_title') - 3)
                 sub_title = YNetJson.slice(YNetJson.search('sub_title') + 12, YNetJson.search('sub_title') - 3)
-                console.log(YNetJson)
+                write2log(YNetJson)
             } else {
-                console.log('from html')
+                write2log('from html')
                 var n = YNetStr.search("<div class='block B6'><div class='element B6 ghcite'><div id='top-story-1'")
-                console.log(n)
+                write2log(n)
                 if (n > 0) {
                     YNetStr = YNetStr.slice(n, YNetStr.length)
                     n = YNetStr.search("<a data-dy-href href=")
@@ -111,17 +118,17 @@
                     sub_title_n2 = sub_title.search('</a>')
                     sub_title = sub_title.slice(0, sub_title_n2 - 1)
                 } else {
-                    console.log("Error")
-                    console.log(YNetStr)
+                    write2log("Error")
+                    write2log(YNetStr)
                     var el_up = document.getElementById("MinArticle");
                     el_up.remove()
                 }
             }
             var el_up = document.getElementById("MinArticle");
 
-            console.log("title: " + title)
-            console.log("sub_title: " + sub_title)
-            console.log("link: " + link)
+            write2log("title: " + title)
+            write2log("sub_title: " + sub_title)
+            write2log("link: " + link)
 
             el_up.innerHTML = '<div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title" style="font-size: 60px;">' + title + '</h5><p class="card-text" style="font-size: 50px;">' + sub_title + '</p><a href="' + link + '" class="btn btn-primary" style="font-size: 50px;">לכתבה</a></div></div>'
 
