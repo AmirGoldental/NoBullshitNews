@@ -94,6 +94,7 @@
                 var YNetJson = YNetJson.slice(n_json_1, n_json_2 + 1)
                 title = YNetJson.slice(YNetJson.search('title') + 8, YNetJson.search('sub_title') - 3)
                 sub_title = YNetJson.slice(YNetJson.search('sub_title') + 12, YNetJson.search('red_title') - 3)
+                link = YNetJson.slice(YNetJson.search('href') + 7, YNetJson.search('IsPay') - 3)
                 write2log(YNetJson)
             } else {
                 write2log('from html')
